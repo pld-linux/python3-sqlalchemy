@@ -10,6 +10,7 @@ Source0:	http://cheeseshop.python.org/packages/source/S/SQLAlchemy/SQLAlchemy-%{
 URL:		http://www.sqlalchemy.org/
 BuildRequires:	python-devel
 BuildRequires:	python-setuptools >= 0.6-0.a9.1
+BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.219
 %pyrequires_eq  python-modules
 BuildArch:	noarch
