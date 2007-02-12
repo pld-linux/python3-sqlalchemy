@@ -1,5 +1,5 @@
 Summary:	Database Abstraction Library
-Summary(pl):	Biblioteka abstrakcji baz danych
+Summary(pl.UTF-8):   Biblioteka abstrakcji baz danych
 Name:		python-SQLAlchemy
 Version:	0.3.3
 Release:	1
@@ -23,12 +23,12 @@ SQLAlchemy provides a full suite of well known enterprise-level
 persistence patterns, designed for efficient and high-performing
 database access, adapted into a simple and Pythonic domain language.
 
-%description -l pl
-Zestaw narzêdzi SQL dla Pythona oraz odwzorowañ obiektowo-relacyjnych
-daj±cych programistom ca³± potêgê i elastyczno¶æ SQL-a. SQLAlchemy
-udostêpnia pe³ny zbiór dobrze znanych wzorców trwa³o¶ci,
-zaprojektowanych do wydajnego dostêpu do baz danych, zaadoptowanych do
-prostej, pythonowej domeny jêzykowej.
+%description -l pl.UTF-8
+Zestaw narzÄ™dzi SQL dla Pythona oraz odwzorowaÅ„ obiektowo-relacyjnych
+dajÄ…cych programistom caÅ‚Ä… potÄ™gÄ™ i elastycznoÅ›Ä‡ SQL-a. SQLAlchemy
+udostÄ™pnia peÅ‚ny zbiÃ³r dobrze znanych wzorcÃ³w trwaÅ‚oÅ›ci,
+zaprojektowanych do wydajnego dostÄ™pu do baz danych, zaadoptowanych do
+prostej, pythonowej domeny jÄ™zykowej.
 
 %prep
 %setup -q -n SQLAlchemy-%{version}
