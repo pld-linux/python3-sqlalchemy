@@ -1,5 +1,5 @@
 Summary:	Database Abstraction Library
-Summary(pl.UTF-8):   Biblioteka abstrakcji baz danych
+Summary(pl.UTF-8):	Biblioteka abstrakcji baz danych
 Name:		python-SQLAlchemy
 Version:	0.3.3
 Release:	1
