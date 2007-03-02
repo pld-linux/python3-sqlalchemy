@@ -1,12 +1,12 @@
 Summary:	Database Abstraction Library
 Summary(pl.UTF-8):	Biblioteka abstrakcji baz danych
 Name:		python-SQLAlchemy
-Version:	0.3.3
+Version:	0.3.5
 Release:	1
 License:	MIT
 Group:		Development/Languages/Python
 Source0:	http://cheeseshop.python.org/packages/source/S/SQLAlchemy/SQLAlchemy-%{version}.tar.gz
-# Source0-md5:	1336d87f659944f131f7f2c340e81e02
+# Source0-md5:	5d4a317c542247f82d1ed7e256976117
 URL:		http://www.sqlalchemy.org/
 BuildRequires:	python-devel
 BuildRequires:	python-setuptools >= 0.6-0.a9.1
@@ -42,6 +42,8 @@ python setup.py install \
 	--single-version-externally-managed \
 	--optimize=2 \
 	--root=$RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
+cp -r examples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 %py_postclean
 
@@ -50,6 +52,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README CHANGES doc/*html examples/
+%doc README CHANGES doc/*html
 %{py_sitescriptdir}/SQLAlchemy*
 %{py_sitescriptdir}/sqlalchemy*
+%{_examplesdir}/%{name}-%{version}/
