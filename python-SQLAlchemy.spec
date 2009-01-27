@@ -1,12 +1,12 @@
 Summary:	Database Abstraction Library
 Summary(pl.UTF-8):	Biblioteka abstrakcji baz danych
 Name:		python-SQLAlchemy
-Version:	0.4.8
+Version:	0.5.2
 Release:	1
 License:	MIT
 Group:		Libraries/Python
 Source0:	http://dl.sourceforge.net/sqlalchemy/SQLAlchemy-%{version}.tar.gz
-# Source0-md5:	2377e8f87d60e5040e2efc67bfd240b0
+# Source0-md5:	d2b041f5877bf108b8ecf7a624e1bec0
 URL:		http://www.sqlalchemy.org/
 BuildRequires:	python-devel
 BuildRequires:	python-setuptools >= 0.6-0.a9.1
@@ -24,24 +24,26 @@ persistence patterns, designed for efficient and high-performing
 database access, adapted into a simple and Pythonic domain language.
 
 %description -l pl.UTF-8
-Zestaw narzędzi SQL dla Pythona oraz odwzorowań obiektowo-relacyjnych
-dających programistom całą potęgę i elastyczność SQL-a. SQLAlchemy
-udostępnia pełny zbiór dobrze znanych wzorców trwałości,
-zaprojektowanych do wydajnego dostępu do baz danych, zaadoptowanych do
-prostej, pythonowej domeny językowej.
+Zestaw narzędzi SQL dla Pythona oraz odwzorowań
+obiektowo-relacyjnych dających programistom całą potęgę i
+elastyczność SQL-a. SQLAlchemy udostępnia pełny zbiór dobrze
+znanych wzorców trwałości, zaprojektowanych do wydajnego dostępu
+do baz danych, zaadoptowanych do prostej, pythonowej domeny
+językowej.
 
 %prep
 %setup -q -n SQLAlchemy-%{version}
 
 %build
-python setup.py build
+%{__python} setup.py build
 
 %install
 rm -rf $RPM_BUILD_ROOT
-python setup.py install \
+%{__python} setup.py install \
 	--single-version-externally-managed \
 	--optimize=2 \
 	--root=$RPM_BUILD_ROOT
+
 install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 cp -r examples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
@@ -52,7 +54,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README CHANGES doc/*html
+%doc CHANGES README* doc/*.html
 %{py_sitescriptdir}/SQLAlchemy*
 %{py_sitescriptdir}/sqlalchemy*
 %{_examplesdir}/%{name}-%{version}/
