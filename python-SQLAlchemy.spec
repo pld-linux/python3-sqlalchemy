@@ -24,12 +24,11 @@ persistence patterns, designed for efficient and high-performing
 database access, adapted into a simple and Pythonic domain language.
 
 %description -l pl.UTF-8
-Zestaw narzędzi SQL dla Pythona oraz odwzorowań
-obiektowo-relacyjnych dających programistom całą potęgę i
-elastyczność SQL-a. SQLAlchemy udostępnia pełny zbiór dobrze
-znanych wzorców trwałości, zaprojektowanych do wydajnego dostępu
-do baz danych, zaadoptowanych do prostej, pythonowej domeny
-językowej.
+Zestaw narzędzi SQL dla Pythona oraz odwzorowań obiektowo-relacyjnych
+dających programistom całą potęgę i elastyczność SQL-a. SQLAlchemy
+udostępnia pełny zbiór dobrze znanych wzorców trwałości,
+zaprojektowanych do wydajnego dostępu do baz danych, zaadoptowanych do
+prostej, pythonowej domeny językowej.
 
 %prep
 %setup -q -n SQLAlchemy-%{version}
@@ -57,4 +56,4 @@ rm -rf $RPM_BUILD_ROOT
 %doc CHANGES README* doc/*.html
 %{py_sitescriptdir}/SQLAlchemy*
 %{py_sitescriptdir}/sqlalchemy*
-%{_examplesdir}/%{name}-%{version}/
+%{_examplesdir}/%{name}-%{version}
