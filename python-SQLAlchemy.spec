@@ -22,6 +22,7 @@ BuildRequires:	python-setuptools >= 0.6-0.a9.1
 %if %{with python3}
 BuildRequires:	python3-devel
 BuildRequires:	python3-distribute
+BuildRequires:	python3-2to3
 %endif
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.219
