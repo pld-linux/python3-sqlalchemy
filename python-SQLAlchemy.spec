@@ -120,7 +120,9 @@ rm -rf $RPM_BUILD_ROOT
 %{py_sitescriptdir}/sqlalchemy*
 %{_examplesdir}/%{name}-%{version}
 
+%if %{with python3}
 %files -n python3-%{module}
 %defattr(644,root,root,755)
 %{py3_sitescriptdir}/SQLAlchemy*
 %{py3_sitescriptdir}/sqlalchemy*
+%endif
