@@ -1,5 +1,6 @@
 # TODO:
 # - examples and docs for python3
+# - builds, but got syntax errors when buildings
 #
 %bcond_without	python3
 %bcond_without	python2
@@ -8,21 +9,21 @@
 Summary:	Database Abstraction Library
 Summary(pl.UTF-8):	Biblioteka abstrakcji baz danych
 Name:		python-%{module}
-Version:	0.6.1
-Release:	2
+Version:	0.6.2
+Release:	0.1
 License:	MIT
 Group:		Libraries/Python
 Source0:	http://downloads.sourceforge.net/sqlalchemy/%{module}-%{version}.tar.gz
-# Source0-md5:	8b25a820a81469b54b05426705108061
+# Source0-md5:	0dfb23391076c78ef0b91d3842a2a658
 URL:		http://www.sqlalchemy.org/
 %if %{with python2}
 BuildRequires:	python-devel >= 1:2.4
+BuildRequires:	python-distribute
 BuildRequires:	python-setuptools >= 0.6-0.a9.1
 %endif
 %if %{with python3}
 BuildRequires:	python3-2to3
 BuildRequires:	python3-devel
-BuildRequires:	python3-distribute
 BuildRequires:	python3-modules
 %endif
 BuildRequires:	rpm-pythonprov
@@ -100,7 +101,6 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with python3}
 %{__python3} setup.py build -b build-3 \
 	install \
-	--single-version-externally-managed \
 	--root=$RPM_BUILD_ROOT \
 	--optimize=2
 
