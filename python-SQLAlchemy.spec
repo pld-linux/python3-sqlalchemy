@@ -4,17 +4,19 @@
 #
 %bcond_without	python3
 %bcond_without	python2
+#
+%define		_beta	b2
 %define		module  SQLAlchemy
 #
 Summary:	Database Abstraction Library
 Summary(pl.UTF-8):	Biblioteka abstrakcji baz danych
 Name:		python-%{module}
-Version:	0.6.6
-Release:	0.1
+Version:	0.7
+Release:	0.%{_beta}.1
 License:	MIT
 Group:		Libraries/Python
-Source0:	http://downloads.sourceforge.net/sqlalchemy/%{module}-%{version}.tar.gz
-# Source0-md5:	359f02242c52e92aa881c36c8e3720d8
+Source0:	http://downloads.sourceforge.net/sqlalchemy/%{module}-%{version}%{_beta}.tar.gz
+# Source0-md5:	91da9d3ba7b55561e07315169095d74e
 URL:		http://www.sqlalchemy.org/
 %if %{with python2}
 BuildRequires:	python-devel >= 1:2.4
@@ -76,7 +78,7 @@ prostej, pythonowej domeny językowej.
 Wersja dla Pythona 3.x.
 
 %prep
-%setup -q -n %{module}-%{version}
+%setup -q -n %{module}-%{version}%{_beta}
 
 %build
 %if %{with python2}
@@ -108,7 +110,7 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
-cp -r examples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
+cp -a examples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
