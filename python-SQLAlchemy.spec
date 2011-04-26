@@ -1,11 +1,10 @@
 # TODO:
 # - examples and docs for python3
-# - builds, but got syntax errors when buildings
 #
 %bcond_without	python3
 %bcond_without	python2
 #
-%define		_beta	b2
+%define		_beta	b4
 %define		module  SQLAlchemy
 #
 Summary:	Database Abstraction Library
@@ -16,7 +15,7 @@ Release:	0.%{_beta}.1
 License:	MIT
 Group:		Libraries/Python
 Source0:	http://downloads.sourceforge.net/sqlalchemy/%{module}-%{version}%{_beta}.tar.gz
-# Source0-md5:	91da9d3ba7b55561e07315169095d74e
+# Source0-md5:	6a22931afbff931135438352e373d7f9
 URL:		http://www.sqlalchemy.org/
 %if %{with python2}
 BuildRequires:	python-devel >= 1:2.4
@@ -118,8 +117,8 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc CHANGES README* doc/*.html
-%{py_sitescriptdir}/SQLAlchemy*
-%{py_sitescriptdir}/sqlalchemy*
+%{py_sitedir}/SQLAlchemy*
+%{py_sitedir}/sqlalchemy*
 %{_examplesdir}/%{name}-%{version}
 
 %if %{with python3}
