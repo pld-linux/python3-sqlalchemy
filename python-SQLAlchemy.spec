@@ -2,19 +2,19 @@
 # - examples and docs for python3
 # - builds, but got syntax errors when buildings
 #
-%bcond_without	python3
-%bcond_without	python2
+%bcond_without	python2	# CPython 2.x module
+%bcond_without	python3	# CPython 3.x module
+
 %define		module  SQLAlchemy
-#
 Summary:	Database Abstraction Library
 Summary(pl.UTF-8):	Biblioteka abstrakcji baz danych
 Name:		python-%{module}
-Version:	0.6.8
-Release:	2
+Version:	0.6.9
+Release:	1
 License:	MIT
 Group:		Libraries/Python
 Source0:	http://downloads.sourceforge.net/sqlalchemy/%{module}-%{version}.tar.gz
-# Source0-md5:	af56550a6eb8b7a8874b02c97407d73c
+# Source0-md5:	518c5eeca5623bb1fbac74f6917f922a
 URL:		http://www.sqlalchemy.org/
 %if %{with python2}
 BuildRequires:	python-devel >= 1:2.4
