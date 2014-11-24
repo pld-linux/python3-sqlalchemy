@@ -1,6 +1,7 @@
 # TODO:
 # - examples and docs for python3
 # - builds, but got syntax errors when buildings
+# - rename to python-sqlalchemy to match "import" line
 #
 %bcond_without	python2	# CPython 2.x module
 %bcond_without	python3	# CPython 3.x module
@@ -16,6 +17,8 @@ Group:		Libraries/Python
 Source0:	http://downloads.sourceforge.net/sqlalchemy/%{module}-%{version}.tar.gz
 # Source0-md5:	518c5eeca5623bb1fbac74f6917f922a
 URL:		http://www.sqlalchemy.org/
+BuildRequires:	rpm-pythonprov
+BuildRequires:	rpmbuild(macros) >= 1.219
 %if %{with python2}
 BuildRequires:	python-devel >= 1:2.4
 BuildRequires:	python-distribute
@@ -26,10 +29,8 @@ BuildRequires:	python3-2to3
 BuildRequires:	python3-devel
 BuildRequires:	python3-modules
 %endif
-BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.219
 %if %{with python2}
-%pyrequires_eq  python-modules
+Requires:	python-modules
 %endif
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -114,13 +115,15 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc CHANGES README* doc/*.html
-%{py_sitescriptdir}/SQLAlchemy*
-%{py_sitescriptdir}/sqlalchemy*
+%{py_sitescriptdir}/sqlalchemy
+%{py_sitescriptdir}/sqlalchemy_nose
+%{py_sitescriptdir}/SQLAlchemy-%{version}-py*.egg-info
 %{_examplesdir}/%{name}-%{version}
 
 %if %{with python3}
 %files -n python3-%{module}
 %defattr(644,root,root,755)
-%{py3_sitescriptdir}/SQLAlchemy*
-%{py3_sitescriptdir}/sqlalchemy*
+%{py3_sitescriptdir}/sqlalchemy
+%{py3_sitescriptdir}/sqlalchemy_nose
+%{py3_sitescriptdir}/SQLAlchemy-%{version}-py*.egg-info
 %endif
