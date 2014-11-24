@@ -1,21 +1,20 @@
 # TODO:
 # - examples and docs for python3
-# - builds, but got syntax errors when buildings
-# - rename to python-sqlalchemy to match "import" line
+#   builds, but got syntax errors when buildings
 #
 %bcond_without	python2	# CPython 2.x module
 %bcond_without	python3	# CPython 3.x module
 
-%define		module  SQLAlchemy
+%define		module  sqlalchemy
 Summary:	Database Abstraction Library
 Summary(pl.UTF-8):	Biblioteka abstrakcji baz danych
 Name:		python-%{module}
-Version:	0.6.9
-Release:	2
+Version:	0.9.8
+Release:	1
 License:	MIT
 Group:		Libraries/Python
-Source0:	http://downloads.sourceforge.net/sqlalchemy/%{module}-%{version}.tar.gz
-# Source0-md5:	518c5eeca5623bb1fbac74f6917f922a
+Source0:	https://pypi.python.org/packages/source/S/SQLAlchemy/SQLAlchemy-%{version}.tar.gz
+# Source0-md5:	470ca4da4a0081efc830f0d90dd91682
 URL:		http://www.sqlalchemy.org/
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.219
@@ -32,7 +31,8 @@ BuildRequires:	python3-modules
 %if %{with python2}
 Requires:	python-modules
 %endif
-BuildArch:	noarch
+Provides:	python-SQLAlchemy = %{version}-%{release}
+Obsoletes:	python-SQLAlchemy <= 0.9.8
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -57,6 +57,8 @@ Wersja dla pythona 2.x.
 Summary:	Database Abstraction Library
 Summary(pl.UTF-8):	Biblioteka abstrakcji baz danych
 Group:		Libraries/Python
+Provides:	python3-SQLAlchemy = %{version}-%{release}
+Obsoletes:	python3-SQLAlchemy <= 0.9.8
 
 %description -n python3-%{module}
 The Python SQL toolkit and Object Relational Mapper that gives
@@ -77,13 +79,17 @@ prostej, pythonowej domeny językowej.
 Wersja dla Pythona 3.x.
 
 %prep
-%setup -q -n %{module}-%{version}
+%setup -q -n SQLAlchemy-%{version}
 
 %build
 %if %{with python2}
+CC="%{__cc}" \
+CFLAGS="%{rpmcppflags} %{rpmcflags}" \
 %{__python} setup.py build -b build-2
 %endif
 %if %{with python3}
+CC="%{__cc}" \
+CFLAGS="%{rpmcppflags} %{rpmcflags}" \
 %{__python3} setup.py build -b build-3
 %endif
 
@@ -115,15 +121,13 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc CHANGES README* doc/*.html
-%{py_sitescriptdir}/sqlalchemy
-%{py_sitescriptdir}/sqlalchemy_nose
-%{py_sitescriptdir}/SQLAlchemy-%{version}-py*.egg-info
+%{py_sitedir}/sqlalchemy
+%{py_sitedir}/SQLAlchemy-%{version}-py*.egg-info
 %{_examplesdir}/%{name}-%{version}
 
 %if %{with python3}
 %files -n python3-%{module}
 %defattr(644,root,root,755)
-%{py3_sitescriptdir}/sqlalchemy
-%{py3_sitescriptdir}/sqlalchemy_nose
-%{py3_sitescriptdir}/SQLAlchemy-%{version}-py*.egg-info
+%{py3_sitedir}/sqlalchemy
+%{py3_sitedir}/SQLAlchemy-%{version}-py*.egg-info
 %endif
