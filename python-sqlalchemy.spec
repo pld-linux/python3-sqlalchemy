@@ -32,7 +32,7 @@ BuildRequires:	python3-modules
 Requires:	python-modules
 %endif
 Provides:	python-SQLAlchemy = %{version}-%{release}
-Obsoletes:	python-SQLAlchemy <= 0.9.8
+Obsoletes:	python-SQLAlchemy < 0.9.8
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -58,7 +58,7 @@ Summary:	Database Abstraction Library
 Summary(pl.UTF-8):	Biblioteka abstrakcji baz danych
 Group:		Libraries/Python
 Provides:	python3-SQLAlchemy = %{version}-%{release}
-Obsoletes:	python3-SQLAlchemy <= 0.9.8
+Obsoletes:	python3-SQLAlchemy < 0.9.8
 
 %description -n python3-%{module}
 The Python SQL toolkit and Object Relational Mapper that gives
