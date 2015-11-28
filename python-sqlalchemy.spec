@@ -85,19 +85,18 @@ Wersja dla Pythona 3.x.
 %if %{with python2}
 CC="%{__cc}" \
 CFLAGS="%{rpmcppflags} %{rpmcflags}" \
-%{__python} setup.py build -b build-2
+%py_build
 %endif
 %if %{with python3}
 CC="%{__cc}" \
 CFLAGS="%{rpmcppflags} %{rpmcflags}" \
-%{__python3} setup.py build -b build-3
+%py3_build
 %endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
 %if %{with python2}
-%{__python} setup.py build -b build-2 \
-	install \
+%py_install \
 	--single-version-externally-managed \
 	--optimize=2 \
 	--root=$RPM_BUILD_ROOT
@@ -106,10 +105,7 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %if %{with python3}
-%{__python3} setup.py build -b build-3 \
-	install \
-	--root=$RPM_BUILD_ROOT \
-	--optimize=2
+%py3_install
 %endif
 
 install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
