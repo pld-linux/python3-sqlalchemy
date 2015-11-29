@@ -17,7 +17,7 @@ Source0:	https://pypi.python.org/packages/source/S/SQLAlchemy/SQLAlchemy-%{versi
 # Source0-md5:	470ca4da4a0081efc830f0d90dd91682
 URL:		http://www.sqlalchemy.org/
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.219
+BuildRequires:	rpmbuild(macros) >= 1.710
 %if %{with python2}
 BuildRequires:	python-devel >= 1:2.4
 BuildRequires:	python-distribute
