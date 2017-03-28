@@ -14,7 +14,7 @@ Release:	1
 License:	MIT
 Group:		Libraries/Python
 Source0:	https://pypi.python.org/packages/29/18/a78469bc449d9f92f6269cc62d0d6fbe6bf394d1031b447ad5e54463c3a0/SQLAlchemy-%{version}.tar.gz
-# Source0-md5:	470ca4da4a0081efc830f0d90dd91682
+# Source0-md5:	888fd3fd50a03714d9b30b023d2a0f29
 URL:		http://www.sqlalchemy.org/
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.710
