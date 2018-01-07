@@ -9,12 +9,12 @@
 Summary:	Database Abstraction Library
 Summary(pl.UTF-8):	Biblioteka abstrakcji baz danych
 Name:		python-%{module}
-Version:	1.1.15
+Version:	1.2.0
 Release:	1
 License:	MIT
 Group:		Libraries/Python
-Source0:	https://pypi.python.org/packages/c2/f6/11fcc1ce19a7cb81b1c9377f4e27ce3813265611922e355905e57c44d164/SQLAlchemy-%{version}.tar.gz
-# Source0-md5:	077f9bd3339957f53068b5572a152674
+Source0:	https://pypi.python.org/packages/be/d1/0008f4ee8d8eaae328efbf9cc513c1bee6f6793de11ab82cb31b3045ee06/SQLAlchemy-%{version}.tar.gz
+# Source0-md5:	25c02c5715f681f10decad0ef07e3afc
 URL:		http://www.sqlalchemy.org/
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.710
