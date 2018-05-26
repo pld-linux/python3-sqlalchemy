@@ -1,36 +1,43 @@
-# TODO:
-# - examples and docs for python3
-#   builds, but got syntax errors when buildings
 #
 %bcond_without	python2	# CPython 2.x module
 %bcond_without	python3	# CPython 3.x module
+%bcond_without	tests	# unit tests
 
 %define		module  sqlalchemy
-Summary:	Database Abstraction Library
-Summary(pl.UTF-8):	Biblioteka abstrakcji baz danych
+Summary:	Database Abstraction Library for Python 2
+Summary(pl.UTF-8):	Biblioteka abstrakcji baz danych dla Pythona 2
 Name:		python-%{module}
-Version:	1.2.0
+Version:	1.2.7
 Release:	1
 License:	MIT
 Group:		Libraries/Python
-Source0:	https://pypi.python.org/packages/be/d1/0008f4ee8d8eaae328efbf9cc513c1bee6f6793de11ab82cb31b3045ee06/SQLAlchemy-%{version}.tar.gz
-# Source0-md5:	25c02c5715f681f10decad0ef07e3afc
+#Source0Download: https://pypi.org/simple/sqlalchemy/
+Source0:	https://files.pythonhosted.org/packages/source/S/SQLAlchemy/SQLAlchemy-%{version}.tar.gz
+# Source0-md5:	d228d11a6f41b94cb3a3789b5cdbd111
+Patch0:		%{name}-tests.patch
 URL:		http://www.sqlalchemy.org/
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.710
+BuildRequires:	rpmbuild(macros) >= 1.714
 %if %{with python2}
-BuildRequires:	python-devel >= 1:2.4
-BuildRequires:	python-distribute
+BuildRequires:	python-devel >= 1:2.7
+BuildRequires:	python-modules >= 1:2.7
 BuildRequires:	python-setuptools >= 0.6-0.a9.1
+%if %{with tests}
+BuildRequires:	python-mock
+BuildRequires:	python-pytest >= 2.5.2
+BuildRequires:	python-pytest-xdist
+%endif
 %endif
 %if %{with python3}
-BuildRequires:	python3-2to3
-BuildRequires:	python3-devel
-BuildRequires:	python3-modules
+BuildRequires:	python3-devel >= 1:3.2
+BuildRequires:	python3-modules >= 1:3.2
+BuildRequires:	python3-setuptools >= 0.6-0.a9.1
+%if %{with tests}
+BuildRequires:	python3-pytest >= 2.5.2
+BuildRequires:	python3-pytest-xdist
 %endif
-%if %{with python2}
+%endif
 Requires:	python-modules
-%endif
 Provides:	python-SQLAlchemy = %{version}-%{release}
 Obsoletes:	python-SQLAlchemy < 0.9.8
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -45,17 +52,17 @@ database access, adapted into a simple and Pythonic domain language.
 Python 2.x version.
 
 %description -l pl.UTF-8
-Zestaw narzędzi SQL dla Pythona oraz odwzorowań obiektowo-relacyjnych
-dających programistom całą potęgę i elastyczność SQL-a. SQLAlchemy
+Zestaw narzędzi SQL oraz odwzorowań obiektowo-relacyjnych dla Pythona,
+dający programistom całą potęgę i elastyczność SQL-a. SQLAlchemy
 udostępnia pełny zbiór dobrze znanych wzorców trwałości,
-zaprojektowanych do wydajnego dostępu do baz danych, zaadoptowanych do
-prostej, pythonowej domeny językowej.
+zaprojektowanych z myślą o efektywny i wydajnym dostępem do baz
+danych, zaadaptowanych do prostego, pythonowego języka.
 
 Wersja dla pythona 2.x.
 
 %package -n python3-%{module}
-Summary:	Database Abstraction Library
-Summary(pl.UTF-8):	Biblioteka abstrakcji baz danych
+Summary:	Database Abstraction Library for Python 3
+Summary(pl.UTF-8):	Biblioteka abstrakcji baz danych dla Pythona 3
 Group:		Libraries/Python
 Provides:	python3-SQLAlchemy = %{version}-%{release}
 Obsoletes:	python3-SQLAlchemy < 0.9.8
@@ -70,36 +77,59 @@ database access, adapted into a simple and Pythonic domain language.
 Python 3.x version.
 
 %description -n python3-%{module} -l pl.UTF-8
-Zestaw narzędzi SQL dla Pythona oraz odwzorowań obiektowo-relacyjnych
-dających programistom całą potęgę i elastyczność SQL-a. SQLAlchemy
+Zestaw narzędzi SQL oraz odwzorowań obiektowo-relacyjnych dla Pythona,
+dający programistom całą potęgę i elastyczność SQL-a. SQLAlchemy
 udostępnia pełny zbiór dobrze znanych wzorców trwałości,
-zaprojektowanych do wydajnego dostępu do baz danych, zaadoptowanych do
-prostej, pythonowej domeny językowej.
+zaprojektowanych z myślą o efektywny i wydajnym dostępem do baz
+danych, zaadaptowanych do prostego, pythonowego języka.
 
 Wersja dla Pythona 3.x.
 
+%package apidocs
+Summary:	API documentation for Python SQLAlchemy module
+Summary(pl.UTF-8):	Dokumentacja API modułu Pythona SQLAlchemy
+Group:		Documentation
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
+
+%description apidocs
+API documentation for Python SQLAlchemy module.
+
+%description apidocs -l pl.UTF-8
+Dokumentacja API modułu Pythona SQLAlchemy.
+
+%package examples
+Summary:	Examples for Python SQLAlchemy module
+Summary(pl.UTF-8):	Przykłady do modułu Pythona SQLAlchemy
+Group:		Documentation
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
+
+%description examples
+Examples for Python SQLAlchemy module.
+
+%description examples -l pl.UTF-8
+Przykłady do modułu Pythona SQLAlchemy.
+
 %prep
 %setup -q -n SQLAlchemy-%{version}
+%patch0 -p1
 
 %build
 %if %{with python2}
-CC="%{__cc}" \
-CFLAGS="%{rpmcppflags} %{rpmcflags}" \
-%py_build
+%py_build %{?with_tests:test}
 %endif
+
 %if %{with python3}
-CC="%{__cc}" \
-CFLAGS="%{rpmcppflags} %{rpmcflags}" \
-%py3_build
+%py3_build %{?with_tests:test}
 %endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
 %if %{with python2}
-%py_install \
-	--single-version-externally-managed \
-	--optimize=2 \
-	--root=$RPM_BUILD_ROOT
+%py_install
 
 %py_postclean
 %endif
@@ -109,21 +139,58 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
-cp -r examples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
+cp -pr examples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc CHANGES README* doc/*.html
-%{py_sitedir}/sqlalchemy
+%doc AUTHORS CHANGES LICENSE README.rst
+%dir %{py_sitedir}/sqlalchemy
+%{py_sitedir}/sqlalchemy/connectors
+%{py_sitedir}/sqlalchemy/databases
+%{py_sitedir}/sqlalchemy/dialects
+%{py_sitedir}/sqlalchemy/engine
+%{py_sitedir}/sqlalchemy/event
+%{py_sitedir}/sqlalchemy/ext
+%{py_sitedir}/sqlalchemy/orm
+%{py_sitedir}/sqlalchemy/sql
+%{py_sitedir}/sqlalchemy/testing
+%{py_sitedir}/sqlalchemy/util
+%attr(755,root,root) %{py_sitedir}/sqlalchemy/cprocessors.so
+%attr(755,root,root) %{py_sitedir}/sqlalchemy/cresultproxy.so
+%attr(755,root,root) %{py_sitedir}/sqlalchemy/cutils.so
+%{py_sitedir}/sqlalchemy/*.py[co]
 %{py_sitedir}/SQLAlchemy-%{version}-py*.egg-info
-%{_examplesdir}/%{name}-%{version}
 
 %if %{with python3}
 %files -n python3-%{module}
 %defattr(644,root,root,755)
-%{py3_sitedir}/sqlalchemy
+%doc AUTHORS CHANGES LICENSE README.rst
+%dir %{py3_sitedir}/sqlalchemy
+%{py3_sitedir}/sqlalchemy/connectors
+%{py3_sitedir}/sqlalchemy/databases
+%{py3_sitedir}/sqlalchemy/dialects
+%{py3_sitedir}/sqlalchemy/engine
+%{py3_sitedir}/sqlalchemy/event
+%{py3_sitedir}/sqlalchemy/ext
+%{py3_sitedir}/sqlalchemy/orm
+%{py3_sitedir}/sqlalchemy/sql
+%{py3_sitedir}/sqlalchemy/testing
+%{py3_sitedir}/sqlalchemy/util
+%attr(755,root,root) %{py3_sitedir}/sqlalchemy/cprocessors.cpython-*.so
+%attr(755,root,root) %{py3_sitedir}/sqlalchemy/cresultproxy.cpython-*.so
+%attr(755,root,root) %{py3_sitedir}/sqlalchemy/cutils.cpython-*.so
+%{py3_sitedir}/sqlalchemy/*.py
+%{py3_sitedir}/sqlalchemy/__pycache__
 %{py3_sitedir}/SQLAlchemy-%{version}-py*.egg-info
 %endif
+
+%files apidocs
+%defattr(644,root,root,755)
+%doc doc/{_images,_modules,_static,changelog,core,dialects,faq,orm,*.html,*.js}
+
+%files examples
+%defattr(644,root,root,755)
+%{_examplesdir}/%{name}-%{version}

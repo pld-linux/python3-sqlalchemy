@@ -1,0 +1,34 @@
+--- SQLAlchemy-1.2.7/setup.py.orig	2018-04-20 22:27:50.000000000 +0200
++++ SQLAlchemy-1.2.7/setup.py	2018-05-26 11:23:38.674698725 +0200
+@@ -81,7 +81,7 @@
+     # not working at the time of this comment.
+     user_options = [('pytest-args=', 'a', "Arguments to pass to py.test")]
+ 
+-    default_options = ["-n", "4", "-q", "--nomemory"]
++    default_options = ["-q", "--nomemory"]
+ 
+     def initialize_options(self):
+         TestCommand.initialize_options(self)
+@@ -121,6 +121,13 @@
+     readme = r_file.read()
+ 
+ 
++def get_mock_dep():
++    try:
++        from unittest import mock
++        return []
++    except ImportError:
++        return ['mock']
++
+ def run_setup(with_cext):
+     kwargs = {}
+     if with_cext:
+@@ -139,7 +146,7 @@
+         package_dir={'': 'lib'},
+         license="MIT License",
+         cmdclass=cmdclass,
+-        tests_require=['pytest >= 2.5.2', 'mock', 'pytest-xdist'],
++        tests_require=['pytest >= 2.5.2', 'pytest-xdist'] + get_mock_dep(),
+         long_description=readme,
+         classifiers=[
+             "Development Status :: 5 - Production/Stable",
