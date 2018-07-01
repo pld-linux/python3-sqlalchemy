@@ -7,13 +7,13 @@
 Summary:	Database Abstraction Library for Python 2
 Summary(pl.UTF-8):	Biblioteka abstrakcji baz danych dla Pythona 2
 Name:		python-%{module}
-Version:	1.2.7
-Release:	2
+Version:	1.2.9
+Release:	1
 License:	MIT
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/sqlalchemy/
 Source0:	https://files.pythonhosted.org/packages/source/S/SQLAlchemy/SQLAlchemy-%{version}.tar.gz
-# Source0-md5:	d228d11a6f41b94cb3a3789b5cdbd111
+# Source0-md5:	e015ef32ec33047382d95ab3ff60722a
 Patch0:		%{name}-tests.patch
 URL:		http://www.sqlalchemy.org/
 BuildRequires:	rpm-pythonprov
