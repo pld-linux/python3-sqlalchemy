@@ -27,8 +27,8 @@
          package_dir={'': 'lib'},
          license="MIT License",
          cmdclass=cmdclass,
--        tests_require=['pytest >= 2.5.2', 'mock', 'pytest-xdist'],
-+        tests_require=['pytest >= 2.5.2', 'pytest-xdist'] + get_mock_dep(),
+-        tests_require=['pytest>=2.5.2,!=3.9.1', 'mock', 'pytest-xdist'],
++        tests_require=['pytest>=2.5.2,!=3.9.1', 'pytest-xdist'] + get_mock_dep(),
          long_description=readme,
          classifiers=[
              "Development Status :: 5 - Production/Stable",
