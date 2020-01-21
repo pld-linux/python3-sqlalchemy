@@ -1,4 +1,5 @@
 #
+# Conditional build:
 %bcond_without	python2	# CPython 2.x module
 %bcond_without	python3	# CPython 3.x module
 %bcond_without	tests	# unit tests
@@ -7,13 +8,13 @@
 Summary:	Database Abstraction Library for Python 2
 Summary(pl.UTF-8):	Biblioteka abstrakcji baz danych dla Pythona 2
 Name:		python-%{module}
-Version:	1.2.15
-Release:	2
+Version:	1.3.12
+Release:	1
 License:	MIT
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/sqlalchemy/
 Source0:	https://files.pythonhosted.org/packages/source/S/SQLAlchemy/SQLAlchemy-%{version}.tar.gz
-# Source0-md5:	e5df26cee44a3df9fa9b7daf169a3a69
+# Source0-md5:	02a46be841903b60c52a83342d3ced8e
 Patch0:		%{name}-tests.patch
 URL:		http://www.sqlalchemy.org/
 BuildRequires:	rpm-pythonprov
@@ -29,8 +30,8 @@ BuildRequires:	python-pytest-xdist
 %endif
 %endif
 %if %{with python3}
-BuildRequires:	python3-devel >= 1:3.2
-BuildRequires:	python3-modules >= 1:3.2
+BuildRequires:	python3-devel >= 1:3.4
+BuildRequires:	python3-modules >= 1:3.4
 BuildRequires:	python3-setuptools >= 0.6-0.a9.1
 %if %{with tests}
 BuildRequires:	python3-pytest >= 2.5.2
@@ -89,7 +90,7 @@ Wersja dla Pythona 3.x.
 Summary:	API documentation for Python SQLAlchemy module
 Summary(pl.UTF-8):	Dokumentacja API modułu Pythona SQLAlchemy
 Group:		Documentation
-%if "%{_rpmversion}" >= "5"
+%if "%{_rpmversion}" >= "4.6"
 BuildArch:	noarch
 %endif
 
@@ -103,7 +104,7 @@ Dokumentacja API modułu Pythona SQLAlchemy.
 Summary:	Examples for Python SQLAlchemy module
 Summary(pl.UTF-8):	Przykłady do modułu Pythona SQLAlchemy
 Group:		Documentation
-%if "%{_rpmversion}" >= "5"
+%if "%{_rpmversion}" >= "4.6"
 BuildArch:	noarch
 %endif
 
@@ -119,11 +120,19 @@ Przykłady do modułu Pythona SQLAlchemy.
 
 %build
 %if %{with python2}
-%py_build %{?with_tests:test}
+%py_build
+
+%if %{with tests}
+%{__python} -m pytest test
+%endif
 %endif
 
 %if %{with python3}
-%py3_build %{?with_tests:test}
+%py3_build
+
+%if %{with tests}
+%{__python3} -m pytest test
+%endif
 %endif
 
 %install
@@ -155,6 +164,7 @@ rm -rf $RPM_BUILD_ROOT
 %{py_sitedir}/sqlalchemy/event
 %{py_sitedir}/sqlalchemy/ext
 %{py_sitedir}/sqlalchemy/orm
+%{py_sitedir}/sqlalchemy/pool
 %{py_sitedir}/sqlalchemy/sql
 %{py_sitedir}/sqlalchemy/testing
 %{py_sitedir}/sqlalchemy/util
@@ -176,6 +186,7 @@ rm -rf $RPM_BUILD_ROOT
 %{py3_sitedir}/sqlalchemy/event
 %{py3_sitedir}/sqlalchemy/ext
 %{py3_sitedir}/sqlalchemy/orm
+%{py3_sitedir}/sqlalchemy/pool
 %{py3_sitedir}/sqlalchemy/sql
 %{py3_sitedir}/sqlalchemy/testing
 %{py3_sitedir}/sqlalchemy/util
