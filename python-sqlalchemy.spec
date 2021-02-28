@@ -90,9 +90,7 @@ Wersja dla Pythona 3.x.
 Summary:	API documentation for Python SQLAlchemy module
 Summary(pl.UTF-8):	Dokumentacja API modułu Pythona SQLAlchemy
 Group:		Documentation
-%if "%{_rpmversion}" >= "4.6"
 BuildArch:	noarch
-%endif
 
 %description apidocs
 API documentation for Python SQLAlchemy module.
@@ -104,9 +102,7 @@ Dokumentacja API modułu Pythona SQLAlchemy.
 Summary:	Examples for Python SQLAlchemy module
 Summary(pl.UTF-8):	Przykłady do modułu Pythona SQLAlchemy
 Group:		Documentation
-%if "%{_rpmversion}" >= "4.6"
 BuildArch:	noarch
-%endif
 
 %description examples
 Examples for Python SQLAlchemy module.
