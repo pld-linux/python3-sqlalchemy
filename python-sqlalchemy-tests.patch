@@ -1,15 +1,16 @@
---- SQLAlchemy-1.2.7/setup.py.orig	2018-04-20 22:27:50.000000000 +0200
-+++ SQLAlchemy-1.2.7/setup.py	2018-05-26 11:23:38.674698725 +0200
-@@ -81,7 +81,7 @@
+diff -urNp -x '*.orig' SQLAlchemy-1.3.23.org/setup.py SQLAlchemy-1.3.23/setup.py
+--- SQLAlchemy-1.3.23.org/setup.py	2021-02-01 21:52:02.000000000 +0100
++++ SQLAlchemy-1.3.23/setup.py	2021-03-07 23:28:59.044650527 +0100
+@@ -89,7 +89,7 @@ class PyTest(TestCommand):
      # not working at the time of this comment.
-     user_options = [('pytest-args=', 'a', "Arguments to pass to py.test")]
+     user_options = [("pytest-args=", "a", "Arguments to pass to py.test")]
  
 -    default_options = ["-n", "4", "-q", "--nomemory"]
 +    default_options = ["-q", "--nomemory"]
  
      def initialize_options(self):
          TestCommand.initialize_options(self)
-@@ -159,7 +159,7 @@
+@@ -159,7 +159,7 @@ def run_setup(with_cext):
          cmdclass=cmdclass,
          tests_require=[
              "pytest>=2.5.2,!=3.9.1,!=3.9.2",
