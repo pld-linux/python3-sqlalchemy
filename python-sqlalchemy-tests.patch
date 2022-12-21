@@ -1,27 +1,6 @@
-diff -urNp -x '*.orig' SQLAlchemy-1.3.23.org/setup.py SQLAlchemy-1.3.23/setup.py
---- SQLAlchemy-1.3.23.org/setup.py	2021-02-01 21:52:02.000000000 +0100
-+++ SQLAlchemy-1.3.23/setup.py	2021-03-07 23:28:59.044650527 +0100
-@@ -89,7 +89,7 @@ class PyTest(TestCommand):
-     # not working at the time of this comment.
-     user_options = [("pytest-args=", "a", "Arguments to pass to py.test")]
- 
--    default_options = ["-n", "4", "-q", "--nomemory"]
-+    default_options = ["-q", "--nomemory"]
- 
-     def initialize_options(self):
-         TestCommand.initialize_options(self)
-@@ -159,7 +159,7 @@ def run_setup(with_cext):
-         cmdclass=cmdclass,
-         tests_require=[
-             "pytest>=2.5.2,!=3.9.1,!=3.9.2",
--            "mock",
-+            "mock;python_version<'3.3'",
-             "pytest-xdist",
-         ],
-         long_description=readme,
---- SQLAlchemy-1.3.23/test/dialect/mssql/test_engine.py~	2021-02-01 21:52:02.000000000 +0100
-+++ SQLAlchemy-1.3.23/test/dialect/mssql/test_engine.py	2021-11-28 20:02:55.581556369 +0100
-@@ -158,26 +158,6 @@
+--- SQLAlchemy-1.3.24/test/dialect/mssql/test_engine.py~	2021-03-31 00:58:18.000000000 +0200
++++ SQLAlchemy-1.3.24/test/dialect/mssql/test_engine.py	2022-03-31 08:03:00.006533320 +0200
+@@ -158,26 +158,6 @@ class ParseConnectTest(fixtures.TestBase
              True,
          )
  
@@ -30,7 +9,7 @@ diff -urNp -x '*.orig' SQLAlchemy-1.3.23.org/setup.py SQLAlchemy-1.3.23/setup.py
 -        dialect = pyodbc.dialect()
 -        u = url.make_url(
 -            "mssql+pyodbc://@server_name/db_name?"
--            "driver=ODBC+Driver+17+for+SQL+Server;"
+-            "driver=ODBC+Driver+17+for+SQL+Server&"
 -            "authentication=ActiveDirectoryIntegrated"
 -        )
 -        connection = dialect.create_connect_args(u)
@@ -48,3 +27,4 @@ diff -urNp -x '*.orig' SQLAlchemy-1.3.23.org/setup.py SQLAlchemy-1.3.23/setup.py
      def test_pyodbc_odbc_connect(self):
          dialect = pyodbc.dialect()
          u = url.make_url(
+

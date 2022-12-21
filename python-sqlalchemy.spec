@@ -8,13 +8,13 @@
 Summary:	Database Abstraction Library for Python 2
 Summary(pl.UTF-8):	Biblioteka abstrakcji baz danych dla Pythona 2
 Name:		python-%{module}
-Version:	1.3.23
-Release:	7
+Version:	1.4.40
+Release:	1
 License:	MIT
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/sqlalchemy/
 Source0:	https://files.pythonhosted.org/packages/source/S/SQLAlchemy/SQLAlchemy-%{version}.tar.gz
-# Source0-md5:	179d25a8fea451f06539c12bb0a00081
+# Source0-md5:	9474e4fd6fce28e474ee55629a17be45
 Patch0:		%{name}-tests.patch
 URL:		https://www.sqlalchemy.org/
 BuildRequires:	rpm-pythonprov
@@ -159,14 +159,15 @@ rm -rf $RPM_BUILD_ROOT
 %{py_sitedir}/sqlalchemy/engine
 %{py_sitedir}/sqlalchemy/event
 %{py_sitedir}/sqlalchemy/ext
+%{py_sitedir}/sqlalchemy/future
 %{py_sitedir}/sqlalchemy/orm
 %{py_sitedir}/sqlalchemy/pool
 %{py_sitedir}/sqlalchemy/sql
 %{py_sitedir}/sqlalchemy/testing
 %{py_sitedir}/sqlalchemy/util
+%attr(755,root,root) %{py_sitedir}/sqlalchemy/cimmutabledict.so
 %attr(755,root,root) %{py_sitedir}/sqlalchemy/cprocessors.so
 %attr(755,root,root) %{py_sitedir}/sqlalchemy/cresultproxy.so
-%attr(755,root,root) %{py_sitedir}/sqlalchemy/cutils.so
 %{py_sitedir}/sqlalchemy/*.py[co]
 %{py_sitedir}/SQLAlchemy-%{version}-py*.egg-info
 
@@ -181,14 +182,16 @@ rm -rf $RPM_BUILD_ROOT
 %{py3_sitedir}/sqlalchemy/engine
 %{py3_sitedir}/sqlalchemy/event
 %{py3_sitedir}/sqlalchemy/ext
+%{py3_sitedir}/sqlalchemy/future
 %{py3_sitedir}/sqlalchemy/orm
 %{py3_sitedir}/sqlalchemy/pool
 %{py3_sitedir}/sqlalchemy/sql
 %{py3_sitedir}/sqlalchemy/testing
 %{py3_sitedir}/sqlalchemy/util
+%attr(755,root,root) %{py3_sitedir}/sqlalchemy/cimmutabledict.cpython-*.so
 %attr(755,root,root) %{py3_sitedir}/sqlalchemy/cprocessors.cpython-*.so
 %attr(755,root,root) %{py3_sitedir}/sqlalchemy/cresultproxy.cpython-*.so
-%attr(755,root,root) %{py3_sitedir}/sqlalchemy/cutils.cpython-*.so
+#%attr(755,root,root) %{py3_sitedir}/sqlalchemy/cutils.cpython-*.so
 %{py3_sitedir}/sqlalchemy/*.py
 %{py3_sitedir}/sqlalchemy/__pycache__
 %{py3_sitedir}/SQLAlchemy-%{version}-py*.egg-info
