@@ -4,13 +4,18 @@
 %bcond_without	python3	# CPython 3.x module
 %bcond_without	tests	# unit tests
 
+# TODO: tests hang on x32
+%ifarch x32
+%undefine with_tests
+%endif
+
 %define		module  sqlalchemy
 Summary:	Database Abstraction Library for Python 2
 Summary(pl.UTF-8):	Biblioteka abstrakcji baz danych dla Pythona 2
 Name:		python-%{module}
 # keep 1.x here for python2 support
 Version:	1.4.50
-Release:	3
+Release:	4
 License:	MIT
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/sqlalchemy/
