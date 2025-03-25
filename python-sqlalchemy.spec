@@ -162,6 +162,7 @@ cp -pr examples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%if %{with python2}
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS CHANGES LICENSE README.rst
@@ -183,6 +184,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{py_sitedir}/sqlalchemy/cresultproxy.so
 %{py_sitedir}/sqlalchemy/*.py[co]
 %{py_sitedir}/SQLAlchemy-%{version}-py*.egg-info
+%endif
 
 %if %{with python3}
 %files -n python3-%{module}
