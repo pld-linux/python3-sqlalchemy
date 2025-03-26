@@ -22,6 +22,7 @@ Group:		Libraries/Python
 Source0:	https://files.pythonhosted.org/packages/source/s/sqlalchemy/sqlalchemy-%{version}.tar.gz
 # Source0-md5:	8f156a25d7ad78a62eebd3da6de1442d
 Patch0:		%{name}-tests.patch
+Patch1:		pep263.patch
 URL:		https://www.sqlalchemy.org/
 BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpm-pythonprov
@@ -120,6 +121,7 @@ Przykłady do modułu Pythona SQLAlchemy.
 %prep
 %setup -q -n sqlalchemy-%{version}
 %patch -P 0 -p1
+%patch -P 1 -p1
 
 %build
 %if %{with python2}
@@ -128,6 +130,7 @@ Przykłady do modułu Pythona SQLAlchemy.
 %if %{with tests}
 PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \
 PYTHONPATH=$(echo $(pwd)/build-2/lib.linux-*) \
+LANG=C.UTF-8 \
 %{__python} -m pytest test -k 'not test_fixture_five'
 # in OverlappingFksSiblingTest.test_fixture_five[False] reported warnings differ from reference
 %endif
