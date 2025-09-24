@@ -6,13 +6,13 @@
 Summary:	Database Abstraction Library for Python
 Summary(pl.UTF-8):	Biblioteka abstrakcji baz danych dla Pythona
 Name:		python3-%{module}
-Version:	2.0.41
+Version:	2.0.43
 Release:	1
 License:	MIT
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/sqlalchemy/
 Source0:	https://files.pythonhosted.org/packages/source/s/sqlalchemy/sqlalchemy-%{version}.tar.gz
-# Source0-md5:	76ade8b13f77b9ceaff6c91f5617c668
+# Source0-md5:	a006c045b1a5610dba083ab3ae5dd991
 URL:		https://www.sqlalchemy.org/
 BuildRequires:	python3-Cython
 BuildRequires:	python3-devel >= 1:3.7
